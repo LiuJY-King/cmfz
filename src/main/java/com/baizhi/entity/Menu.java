@@ -19,6 +19,7 @@ public class Menu implements Serializable {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     @JsonProperty("text")
+    //    @JSONField(name = "text")
     private String title;
     private String iconcls;
     private String url;

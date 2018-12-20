@@ -21,4 +21,19 @@ public class BannerServiceImpl implements BannerService {
         List<Banner> banners = bannerMapper.selectAll();
         return banners;
     }
+
+    @Override
+    public void updateBanner(Banner banner) {
+        bannerMapper.updateByPrimaryKey(banner);
+    }
+
+    @Override
+    public void deleteBanner(Banner banner) {
+        bannerMapper.delete(banner);
+    }
+
+    @Override
+    public void insertBanner(Banner banner) {
+        bannerMapper.insert(banner);
+    }
 }

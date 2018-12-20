@@ -22,11 +22,11 @@ public class MenuController {
 
         return menus;
     }
-    @ResponseBody
+
     @RequestMapping("querySecond")
+    @ResponseBody
     public List<Menu> querySecond(Integer pid){
         List<Menu> menus = menuService.querySecond(pid);
-        System.out.println("Menu==" + menus);
         return menus;
     }
 }

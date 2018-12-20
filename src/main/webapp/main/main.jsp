@@ -7,19 +7,57 @@
     <title>持名法州主页</title>
     <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="../themes/IconExtension.css">
+    <link rel="stylesheet" type="text/css" href="../themes/icon.css">
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         <!--菜单处理-->
-        $('#aa').accordion({
-            fit: true,
-            animate: false
-        });
-        var pp = $('#aa').accordion('getSelected'); // 获取选择的面板
-        if (pp) {
-            pp.panel('refresh', 'new_content.php');  // 调用'refresh'方法刷新
+        $(function () {
+            $.get("${pageContext.request.contextPath}/menu/queryFirst", function (data) {
+                // console.log(data);
+                $.each(data, function (index, first) {
+                    $('#aa').accordion('add', {
+                        title: first.text,
+                        iconCls: first.iconCls,
+                        content: "<div><ul id='tree-" + first.id + "' class='easyui-tree'></ul></div>",
+                        selected: false
+                    });
+                    $("#tree-" + first.id).tree({
+                        url: "${pageContext.request.contextPath}/menu/querySecond?pid=" + first.id,
+                        loadFilter: function (data) {
+                            return data;
+                        },
+                        onClick: function (node) {
+                            // console.log(node);
+                            addTab(node);
+                        }
+                    });
+
+                })
+
+            }, "JSON")
+
+        })
+
+        function addTab(node) {
+            var a = $("#tt").tabs("exists", node.text)
+            if (a) {
+                $("#tt").tabs("select", node.text)
+            } else {
+                $('#tt').tabs('add', {
+                    title: node.text,
+                    iconCls: node.iconCls,
+                    href: "${pageContext.request.contextPath}" + node.url,
+                    selected: true,
+                    closable: true
+
+                });
+            }
         }
+
     </script>
 
 </head>
@@ -39,12 +77,7 @@
 </div>
 
 <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
-    <div id="aa" class="easyui-accordion">
-
-        <div title="Title1" data-options="iconCls:'icon-reload'" style="overflow:auto;padding:10px;">
-            <h3 style="color:#0099FF;">Accordion for jQuery</h3>
-        </div>
-
+    <div id="aa" class="easyui-accordion" data-options="fit:true">
 
     </div>
 </div>

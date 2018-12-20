@@ -20,11 +20,12 @@ public class Banner implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
+
     private String title;
     private String imgPath;
-    private int status;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Integer status;
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 //    @JSONField(format = "yyyy-MM-dd")
     private Date pubDate;
     private String description;
