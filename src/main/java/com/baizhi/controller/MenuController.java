@@ -19,6 +19,13 @@ public class MenuController {
     @ResponseBody
     public List<Menu> queryFirst() {
         List<Menu> menus = menuService.queryFirst();
+
+        return menus;
+    }
+    @ResponseBody
+    @RequestMapping("querySecond")
+    public List<Menu> querySecond(Integer pid){
+        List<Menu> menus = menuService.querySecond(pid);
         System.out.println("Menu==" + menus);
         return menus;
     }

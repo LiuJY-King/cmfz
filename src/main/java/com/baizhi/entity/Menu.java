@@ -1,5 +1,6 @@
 package com.baizhi.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class Menu implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
+    @JsonProperty("text")
     private String title;
     private String iconcls;
     private String url;

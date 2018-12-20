@@ -16,7 +16,6 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> queryFirst() {
-//        List<Menu> menus = menuMapper.queryFirst();
         Menu menu = new Menu();
         menu.setParent_id(0);
         List<Menu> menus = menuMapper.select(menu);
@@ -24,7 +23,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> querySecond() {
-        return null;
+    public List<Menu> querySecond(Integer pid) {
+        Menu menu = new Menu();
+        menu.setParent_id(pid);
+        List<Menu> menus = menuMapper.select(menu);
+        return menus;
     }
+
 }
