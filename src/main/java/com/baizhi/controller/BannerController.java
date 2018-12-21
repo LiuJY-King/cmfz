@@ -29,7 +29,6 @@ public class BannerController {
     public BannerPageDto queryAllBanner(int page, int rows) {
         PageHelper.startPage(page,rows);
         List<Banner> banners = bannerMapper.selectAll();
-//        System.out.println("============"+banners);
         return new BannerPageDto(bannerMapper.selectCount(new Banner()), banners);
     }
 

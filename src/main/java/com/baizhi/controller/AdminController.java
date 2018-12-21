@@ -28,7 +28,8 @@ public class AdminController {
         String code = (String) session.getAttribute("code");
         if (!code.equals(enCode)) return "验证码错误！";
         String str = adminService.login(name, password);
+        if (str.equals("ok"))
+            session.setAttribute("adminName", name);
         return str;
-
     }
 }

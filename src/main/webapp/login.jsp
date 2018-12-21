@@ -70,7 +70,7 @@
                     用户名:
                 </th>
                 <td>
-                    <input id="name" type="text" name="name" class="text" value="xxx" maxlength="20"/>
+                    <input id="name" type="text" name="name" class="text" value="ljy" maxlength="20"/>
                 </td>
             </tr>
             <tr>
@@ -78,7 +78,7 @@
                     密&nbsp;&nbsp;&nbsp;码:
                 </th>
                 <td>
-                    <input id="pwd" type="password" name="password" class="text" value="xxx" maxlength="20"
+                    <input id="pwd" type="password" name="password" class="text" value="123456" maxlength="20"
                            autocomplete="off"/>
                 </td>
             </tr>

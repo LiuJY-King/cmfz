@@ -1,6 +1,7 @@
 package com.baizhi.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,22 +11,26 @@ import tk.mybatis.mapper.annotation.KeySql;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "banner")
-public class Banner implements Serializable {
+@Table(name = "chapter")
+public class Chapter implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
-    private Integer id;
-    private String title;
-    private String imgPath;
-    private Integer status;
+    @JsonProperty("id")
+    private String cid;
+    @JsonProperty("title")
+    private String ctitle;
+    private String size;
+    private String duration;
+    private String url;
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-//    @JSONField(format = "yyyy-MM-dd")
-    private Date pubDate;
-    private String description;
+//  @JSONField(format = "yyyy-MM-dd")
+    private String upload_date;
+    private String album_id;
+
+
 }

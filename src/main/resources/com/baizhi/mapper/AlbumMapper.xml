@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.AlbumMapper">
+    <resultMap id="rm1" type="Album">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="count" property="count"></result>
+        <result column="cover_img" property="cover_img"></result>
+        <result column="score" property="score"></result>
+        <result column="author" property="author"></result>
+        <result column="broadcast" property="broadcast"></result>
+        <result column="brief" property="brief"></result>
+        <result column="pub_date" property="pub_date"></result>
+        <collection property="chapterList" ofType="Chapter">
+            <id column="cid" property="cid"></id>
+            <result column="ctitle" property="ctitle"></result>
+            <result column="size" property="size"></result>
+            <result column="duration" property="duration"></result>
+            <result column="url" property="url"></result>
+            <result column="upload_date" property="upload_date"></result>
+            <result column="album_id" property="album_id"></result>
+        </collection>
+    </resultMap>
+    <select id="queryAllAlbum" resultMap="rm1">
+        select a.*,c.*
+        from (select *
+              from album limit
+                   ${(page-1)*rows},
+                   ${rows}) a
+                 left join chapter c on a.id = c.album_id
+
+    </select>
+</mapper>
