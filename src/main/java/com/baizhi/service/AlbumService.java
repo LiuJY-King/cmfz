@@ -8,4 +8,6 @@ public interface AlbumService {
     List<Album> queryAllAlbum(int page, int rows);
 
     Album queryOneAlbum(Integer id);
+
+    void addOneAlbum(Album album);
 }

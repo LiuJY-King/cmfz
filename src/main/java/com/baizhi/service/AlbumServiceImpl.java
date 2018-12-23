@@ -29,4 +29,9 @@ public class AlbumServiceImpl implements AlbumService {
         album = albumMapper.selectOne(album);
         return album;
     }
+
+    @Override
+    public void addOneAlbum(Album album) {
+        albumMapper.insert(album);
+    }
 }
