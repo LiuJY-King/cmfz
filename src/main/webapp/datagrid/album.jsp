@@ -1,16 +1,16 @@
 <%@page pageEncoding="UTF-8" %>
 <script type="text/javascript">
     var toolbar = [{
-        iconCls: 'icon-add',
+        iconCls: 'icon-edit',
         text: "专辑详情",
         handler: function () {
             var row = $("#album").treegrid("getSelected");
-            console.log(row);
-            if (row != null) {
+            // console.log(row);
+            if (row != null && row.children != null) {
                 $("#detailedDialog").dialog({
                     title: "请输入添加信息",
                     width: 400,
-                    height: 200,
+                    height: 250,
                     modal: true,
                     closed: false,
                     resizable: true,
@@ -19,37 +19,50 @@
                 });
 
             } else {
-                alert("请先选中行")
+                alert("请先选中一条专辑")
             }
 
         }
     }, '-', {
         text: "添加专辑",
-        iconCls: 'icon-edit',
+        iconCls: 'icon-add',
         handler: function () {
-            //获取选中行
-            var row = $("#dg").edatagrid("getSelected");
-            if (row != null) {
-                //编辑指定行
-                var index = $("#dg").edatagrid("getRowIndex", row);
-                $("#dg").edatagrid("editRow", index);
-            } else {
-                alert("请先选中行")
-            }
-
-
+            $("#addAlbumDialog").dialog("open");
         }
     }, '-', {
         text: "添加音频",
-        iconCls: 'icon-remove',
+        iconCls: 'icon-add',
         handler: function () {
-            alert('帮助按钮')
+            var row = $("#album").treegrid("getSelected");
+            // console.log(row);
+            if (row != null && row.children != null) {
+                $("#addChapterDialog").dialog({
+                    title: "请输入添加信息",
+                    width: 400,
+                    height: 250,
+                    modal: true,
+                    closed: false,
+                    resizable: true,
+                    cache: false,
+                    href: "${pageContext.request.contextPath}/main/addOneChapter.jsp?pid=" + row.id
+
+                });
+
+            } else {
+                alert("请先选中一条专辑")
+            }
         }
     }, '-', {
         text: "音频下载",
         iconCls: 'icon-save',
         handler: function () {
-            $("#dg").edatagrid("saveRow")
+            var row = $("#album").treegrid("getSelected");
+            console.log(row);
+            if (row != null && row.url != null) {
+                location.href = "${pageContext.request.contextPath}/chapter/download?fileName=" + row.url;
+            } else {
+                alert("请先选中章节内容")
+            }
 
         }
     }]
@@ -66,12 +79,12 @@
                 {
                     field: 'url', title: '音频', width: 80, formatter: function (value, row, index) {
                         if (row.children == null) {
-                            return "<audio controls='controls'><source src='${pageContext.request.contextPath}" + value +
+                            return "<audio controls='controls'><source src='${pageContext.request.contextPath}/music/" + value +
                                 "' type='audio/mp3' /></audio>";
                         }
                     }
                 },
-                {field: 'duration', title: '时长', width: 40},
+                // {field: 'duration', title: '时长', width: 40},
                 {field: 'size', title: '大小', width: 40},
                 {field: 'upload_date', title: '上传日期', width: 80}
             ]],
@@ -81,8 +94,20 @@
 
         });
     })
+    $("#addAlbumDialog").dialog({
+        title: "添加专辑",
+        width: 400,
+        height: 250,
+        modal: true,
+        closed: true,
+        resizable: true,
+        cache: false,
+        href: "${pageContext.request.contextPath}/main/addOneAlbum.jsp"
+    });
 
 </script>
 
 <table id="album"></table>
 <div id="detailedDialog"></div>
+<div id="addAlbumDialog"></div>
+<div id="addChapterDialog"></div>

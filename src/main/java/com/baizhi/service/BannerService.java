@@ -6,11 +6,11 @@ import com.baizhi.entity.Banner;
 import java.util.List;
 
 public interface BannerService {
-    public List<Banner> queryAllBanner();
+    List<Banner> queryAllBanner();
 
-    public void updateBanner(Banner banner);
+    void updateBanner(Banner banner);
 
-    public void deleteBanner(Banner banner);
+    void deleteBanner(Banner banner);
 
-    public void insertBanner(Banner banner);
+    void insertBanner(Banner banner);
 }
