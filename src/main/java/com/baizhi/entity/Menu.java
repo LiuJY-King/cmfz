@@ -21,6 +21,7 @@ public class Menu implements Serializable {
     @JsonProperty("text")
 //    @JSONField(name = "text")
     private String title;
+    @JsonProperty("iconCls")
     private String iconcls;
     private String url;
     private Integer parent_id;
