@@ -65,6 +65,15 @@
             }
 
         }
+    }, '-', {
+        text: "导出数据",
+        iconCls: 'icon-redo',
+        handler: function () {
+            $.get("${pageContext.request.contextPath}/album/export", function (result) {
+                if (result == "ok")
+                    alert("导出成功");
+            });
+        }
     }]
     $(function () {
         $('#album').treegrid({
