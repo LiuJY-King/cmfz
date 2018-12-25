@@ -32,6 +32,14 @@ public class ChapterController {
         chapter.setUpload_date(new Date());
 
         String path = session.getServletContext().getRealPath("/music");
+//        获取或创建章节文件夹路径
+//        String path = session.getServletContext().getRealPath("/");
+//        String dir = path+"music";
+//        File file=new File(dir);
+//        if(!file.exists()){
+//            file.mkdir();
+//        }
+
         String filename = file3.getOriginalFilename();
         long time = new Date().getTime();
         String newName = time + filename;

@@ -77,10 +77,12 @@ public class AlbumController {
             FileOutputStream fileOutputStream = new FileOutputStream(new File("F:/easypoi.xls"));
             workbook.write(fileOutputStream);
             fileOutputStream.close();
+            System.out.println("导出成功");
+            return "ok";
         } catch (IOException e) {
             e.printStackTrace();
+            return "";
         }
-        System.out.println("导出成功");
-        return "ok";
+
     }
 }
